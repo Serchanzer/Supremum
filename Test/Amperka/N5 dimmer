@@ -1,0 +1,13 @@
+var pot = require('@amperka/pot').connect(A0);
+var led = require('@amperka/led').connect(P1).turnOn();
+var button = require ('@amperka/button').connect(P3);
+var buzzer = require('@amperka/buzzer').connect(P5);
+
+function updateBrightness(){
+ var val = pot.read();
+  led.brightness(val);
+}
+setInvertal(updateBrightness, 1);
+button.on ('press', function(){
+    led.toggle();
+  });
