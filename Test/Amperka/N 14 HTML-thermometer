@@ -1,0 +1,33 @@
+var pot = require('@amperka/pot').connect(A0);
+var light = require('@amperka/led').connect(P1).turnOn();
+var button = require ('@amperka/button').connect(P3);
+var buzzer = require('@amperka/buzzer').connect(P5);
+var sensor = require('@amperka/light-sensor').connect(A2);
+var barrier = require('@amperka/servo').connect(P13).write(45);
+var thermometer = require('@amperka/thermometer').connect(A4);
+
+var type = true;
+button.on('press', function() {
+  type=!type;
+});
+setInterval(function() {
+  if (type) {
+    var celsius = thermometer.read('C');
+    console.log(
+      '<div style="font-size: 0.5em">',
+        'Температура',
+      '</div>', 
+      celsius.toFixed(1),
+      '%C'
+    ); 
+  } else {
+    var fahrenheit = thermometer.read("mV");
+    console.log(
+      '<div style="font-size: 0.5em">',
+        'Температура',
+      '</div>', 
+      fahrenheit.toFixed(1),
+      'F'
+    ); 
+  }
+}, 500);
