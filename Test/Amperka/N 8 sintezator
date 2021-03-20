@@ -1,0 +1,10 @@
+var pot = require('@amperka/pot').connect(A0);
+var led = require('@amperka/led').connect(P1);
+var button = require ('@amperka/button').connect(P3);
+var buzzer = require('@amperka/buzzer').connect(P5).turnOn();
+var sensor = require('@amperka/light-sensor').connect(A2);
+
+setInterval(function() { 
+  var freq = 20 + 4000 * pot.read();
+  buzzer.frequency(freq);
+}, 10);
