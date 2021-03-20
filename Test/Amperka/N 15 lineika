@@ -1,0 +1,12 @@
+var sonic = require('@amperka/ultrasonic').connect({trigPin: P10, echoPin: P11});
+
+
+setInterval(function() {
+  sonic.ping(function(err, val) {
+    if (err) {
+      console.log(err.msg);
+    } else {
+      console.log(val.toFixed(1), 'мм');
+    }
+  }, 'mm');
+}, 1000);
