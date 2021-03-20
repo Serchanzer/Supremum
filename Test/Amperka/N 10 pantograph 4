@@ -1,0 +1,12 @@
+var pot = require('@amperka/pot').connect(A0);
+var led = require('@amperka/led').connect(P1);
+var button = require ('@amperka/button').connect(P3);
+var buzzer = require('@amperka/buzzer').connect(P5);
+var sensor = require('@amperka/light-sensor').connect(A2);
+var servo = require('@amperka/servo').connect(P13);
+
+
+setInterval(function() { 
+  var angle = 180 * pot.read();
+  servo.write(angle);
+}, 20);
